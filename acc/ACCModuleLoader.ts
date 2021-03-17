@@ -32,7 +32,7 @@ const ACCModuleLoader = (() => {
     return accModule;
   }
 
-  function defineModule(modulePath: string, imports: string[], moduleDefinition: Function): void {
+  function defineModule(modulePath: string, imports: string[], moduleDefinition: any): void {
     const [, , ...moduleImports] = imports;
     const exports = (MODULES[modulePath] ??= {});
     const resolvedModuleImports = moduleImports.map(requireModule);
@@ -57,7 +57,7 @@ const ACCModuleLoader = (() => {
     }
   }
 
-  function replaceExportedProperty(exports: any, exportName: string, accClass: Function, accConfiguration: any): void {
+  function replaceExportedProperty(exports: any, exportName: string, accClass: any, accConfiguration: any): void {
     const accModuleName = accConfiguration.name ?? accClass.name;
 
     Object.defineProperty(exports, exportName, {
@@ -77,11 +77,11 @@ const ACCModuleLoader = (() => {
     });
   }
 
-  function isACCClass(exported: Function): boolean {
+  function isACCClass(exported: any): boolean {
     return !!exported[ACC_CONFIGURATION_PROPERTY];
   }
 
-  function createACCModule(accClass: Function, accConfiguration: any): any {
+  function createACCModule(accClass: any, accConfiguration: any): any {
     const accModuleName = accConfiguration.name ?? accClass.name;
 
     if (!accModuleName) {
@@ -108,7 +108,7 @@ const ACCModuleLoader = (() => {
     return accModule;
   }
 
-  function buildAutoload(module: any, accClass: Function, accConfiguration: any): void {
+  function buildAutoload(module: any, accClass: any, accConfiguration: any): void {
     const autoload = module[AUTOLOAD_PROPERTY] = [];
 
     if (typeof accClass === "function") {
@@ -118,7 +118,7 @@ const ACCModuleLoader = (() => {
     populateAutoload(autoload, accConfiguration.autoload);
   }
 
-  function buildInitializer(module: any, accClass: Function): void {
+  function buildInitializer(module: any, accClass: any): void {
     module[INITIALIZER_PROPERTY] = accClass.bind(module);
     module[AUTOLOAD_PROPERTY].push(INITIALIZER_PROPERTY);
   }
@@ -149,7 +149,7 @@ const ACCModuleLoader = (() => {
     }
   }
 
-  function buildMethods(module: any, accClass: Function): void {
+  function buildMethods(module: any, accClass: any): void {
     const methods = accClass.prototype;
 
     for (const property in methods) {
@@ -184,9 +184,9 @@ const ACCModuleLoader = (() => {
   }
 
   function redefineExtends(): void {
-    const extendClass: Function = window[EXTENDS_FUNCTION_NAME];
+    const extendClass: any = window[EXTENDS_FUNCTION_NAME];
 
-    window[EXTENDS_FUNCTION_NAME] = (accClass: Function, extension: any) => {
+    window[EXTENDS_FUNCTION_NAME] = (accClass: any, extension: any) => {
       const isACCModule = typeof extension !== "function";
       let superClass = extension;
 
@@ -211,7 +211,7 @@ const ACCModuleLoader = (() => {
   function defineCall(superACCModule: any, superACCClass: any): void {
     const accModuleCall = superACCModule[CALL_PROPERTY];
 
-    superACCModule[CALL_PROPERTY] = (thisArg, ...args: any[]) => {
+    superACCModule[CALL_PROPERTY] = (thisArg: any, ...args: any[]) => {
       if (thisArg) {
         superACCClass.call(thisArg, ...args);
         superACCModule.apply(null);
@@ -228,7 +228,7 @@ const ACCModuleLoader = (() => {
   function defineApply(accClass: any, superACCModule: any, superACCClass: any): void {
     const accModuleApply = superACCModule[APPLY_PROPERTY];
 
-    superACCModule[APPLY_PROPERTY] = (thisArg, args: any[]) => {
+    superACCModule[APPLY_PROPERTY] = (thisArg: any, args: any[]) => {
       if (thisArg) {
         const accConfiguration = accClass[ACC_CONFIGURATION_PROPERTY];
         const accModule = requireACCModule(accConfiguration.name);
@@ -254,7 +254,7 @@ const ACCModuleLoader = (() => {
   return { define: defineModule, require: requireModule, requireACC: requireACCModule };
 })();
 
-function define(modulePath: string, imports: string[], moduleDefinition: Function) {
+function define(modulePath: string, imports: string[], moduleDefinition: any) {
   window.setTimeout(() => {
     ACCModuleLoader.define(modulePath, imports, moduleDefinition);
   }, 0);
