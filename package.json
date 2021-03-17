@@ -1,6 +1,6 @@
 {
   "private": false,
-  "name": "hybris-acc-typescript",
+  "name": "accts",
   "version": "0.0.1",
   "description": "Typescript Module Loader for seamless integration with Hybris ACC",
   "author": "Gabriel Lopes Nunes <gabriellopes.nunes@hotmail.com>",
@@ -14,12 +14,7 @@
     "url": "https://github.com/gabelopes/hybris-acc-typescript/issues",
     "email": "your-public-email@example.com"
   },
-  "scripts": {
-    "prepublish": "tsc"
-  },
-  "types": "./dist/index.d.ts",
   "devDependencies": {
-    "tslint": "^6.1.3",
     "typescript": "next"
   }
 }
