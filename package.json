@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "accts",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Typescript Module Loader for seamless integration with Hybris ACC",
   "author": "Gabriel Lopes Nunes <gabriellopes.nunes@hotmail.com>",
   "license": "MIT",
