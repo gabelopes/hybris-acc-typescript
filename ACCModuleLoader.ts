@@ -162,6 +162,10 @@ const ACCModuleLoader = (() => {
   }
 
   function buildProperties(module: any, accClass: any): void {
+    if (hasParentPrototype(accClass)) {
+      buildProperties(module, accClass.__proto__);
+    }
+
     for (const propertyName in accClass) {
       if (!accClass.hasOwnProperty(propertyName)) { continue; }
 
@@ -172,10 +176,6 @@ const ACCModuleLoader = (() => {
       } else {
         module[propertyName] = property;
       }
-    }
-
-    if (hasParentPrototype(accClass)) {
-      buildProperties(module, accClass.__proto__);
     }
   }
 
