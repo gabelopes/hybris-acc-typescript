@@ -1,0 +1,26 @@
+{
+  "name": "hybris-acc-typescript",
+  "version": "1.0.0",
+  "description": "Typescript Module Loader for seamless integration with Hybris ACC",
+  "keywords": [
+    "example",
+    "package",
+    "tutorial"
+  ],
+  "homepage": "https://github.com/gabelopes/hybris-acc-typescript",
+  "bugs": {
+    "url": "https://github.com/gabelopes/hybris-acc-typescript/issues",
+    "email": "your-public-email@example.com"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gabelopes/hybris-acc-typescript.git"
+  },
+  "author": "Gabriel Lopes Nunes <gabriellopes.nunes@hotmail.com>",
+  "license": "MIT",
+  "private": false
+}
