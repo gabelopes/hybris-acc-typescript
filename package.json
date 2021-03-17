@@ -15,8 +15,9 @@
     "email": "your-public-email@example.com"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepublish": "tsc"
   },
+  "types": "./dist/index.d.ts",
   "devDependencies": {
     "tslint": "^6.1.3",
     "typescript": "next"
