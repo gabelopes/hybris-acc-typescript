@@ -15,7 +15,7 @@ export interface ACCConfiguration<T> {
   condition?: Predicative;
 }
 
-export function ACC<T>(
+export default function ACC<T>(
   name?: string | ACCConfiguration<T>,
   autoload = (name as ACCConfiguration<T>)?.autoload,
   condition = (name as ACCConfiguration<T>)?.condition
