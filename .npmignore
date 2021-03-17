@@ -1,6 +1,7 @@
 .vscode
 
-dist
 test
 
-.tsconfig
+.editorconfig
+tsconfig.json
+*.js
